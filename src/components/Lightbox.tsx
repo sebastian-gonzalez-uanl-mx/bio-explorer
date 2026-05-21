@@ -30,8 +30,7 @@ export function Lightbox({
   return (
     <Dialog open={open} onOpenChange={(o) => !o && onClose()}>
       <DialogContent
-        showCloseButton={false}
-        className="max-w-5xl border-0 bg-background/95 backdrop-blur p-0 overflow-hidden"
+        className="max-w-5xl border-0 bg-background/95 backdrop-blur p-0 overflow-hidden [&>button.absolute]:hidden"
       >
         {current && (
           <div className="relative">
