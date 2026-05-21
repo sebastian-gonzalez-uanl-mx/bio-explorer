@@ -31,8 +31,7 @@ function Index() {
             A clean, interactive home for four biology lab reports.
           </h1>
           <p className="mt-5 max-w-2xl text-base sm:text-lg text-muted-foreground">
-            Insert your introduction here. Each report includes objective, materials,
-            procedure, results, a multimedia gallery, and conclusion.
+            In this website, you can explore our investigations of the biology laboratoy practices we did during this semester. 
           </p>
         </ScrollReveal>
       </section>
