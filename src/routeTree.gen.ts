@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ReportsSpecimensRouteImport } from './routes/reports.specimens'
 import { Route as ReportsRespirationRouteImport } from './routes/reports.respiration'
 import { Route as ReportsMicroscopeRouteImport } from './routes/reports.microscope'
 import { Route as ReportsDissectionRouteImport } from './routes/reports.dissection'
@@ -17,6 +18,11 @@ import { Route as ReportsDissectionRouteImport } from './routes/reports.dissecti
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReportsSpecimensRoute = ReportsSpecimensRouteImport.update({
+  id: '/reports/specimens',
+  path: '/reports/specimens',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReportsRespirationRoute = ReportsRespirationRouteImport.update({
@@ -40,12 +46,14 @@ export interface FileRoutesByFullPath {
   '/reports/dissection': typeof ReportsDissectionRoute
   '/reports/microscope': typeof ReportsMicroscopeRoute
   '/reports/respiration': typeof ReportsRespirationRoute
+  '/reports/specimens': typeof ReportsSpecimensRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/reports/dissection': typeof ReportsDissectionRoute
   '/reports/microscope': typeof ReportsMicroscopeRoute
   '/reports/respiration': typeof ReportsRespirationRoute
+  '/reports/specimens': typeof ReportsSpecimensRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,6 +61,7 @@ export interface FileRoutesById {
   '/reports/dissection': typeof ReportsDissectionRoute
   '/reports/microscope': typeof ReportsMicroscopeRoute
   '/reports/respiration': typeof ReportsRespirationRoute
+  '/reports/specimens': typeof ReportsSpecimensRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -61,18 +70,21 @@ export interface FileRouteTypes {
     | '/reports/dissection'
     | '/reports/microscope'
     | '/reports/respiration'
+    | '/reports/specimens'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/reports/dissection'
     | '/reports/microscope'
     | '/reports/respiration'
+    | '/reports/specimens'
   id:
     | '__root__'
     | '/'
     | '/reports/dissection'
     | '/reports/microscope'
     | '/reports/respiration'
+    | '/reports/specimens'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -80,6 +92,7 @@ export interface RootRouteChildren {
   ReportsDissectionRoute: typeof ReportsDissectionRoute
   ReportsMicroscopeRoute: typeof ReportsMicroscopeRoute
   ReportsRespirationRoute: typeof ReportsRespirationRoute
+  ReportsSpecimensRoute: typeof ReportsSpecimensRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -89,6 +102,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reports/specimens': {
+      id: '/reports/specimens'
+      path: '/reports/specimens'
+      fullPath: '/reports/specimens'
+      preLoaderRoute: typeof ReportsSpecimensRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reports/respiration': {
@@ -120,6 +140,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReportsDissectionRoute: ReportsDissectionRoute,
   ReportsMicroscopeRoute: ReportsMicroscopeRoute,
   ReportsRespirationRoute: ReportsRespirationRoute,
+  ReportsSpecimensRoute: ReportsSpecimensRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
